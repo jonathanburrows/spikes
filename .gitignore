@@ -1,0 +1,10 @@
+.vs/
+bin/
+obj/
+node_modules/
+dist/
+*.log.*
+*.log*
+*.xproj.user
+project.lock.json
+~$*
