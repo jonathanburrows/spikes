@@ -1,0 +1,31 @@
+﻿<md-card class="local-login">
+    <form name="local-login__form" (ngSubmit)="login()">
+        <md-card-header>
+            <md-card-title>Sign into lavalav</md-card-title>
+        </md-card-header>
+
+        <md-card-content>
+            <md-input-container class="local-login__input">
+                <input mdInput
+                       placeholder="Username"
+                       name="username"
+                       [(ngModel)]="model.username"
+                       required="required" />
+            </md-input-container>
+
+            <md-input-container class="local-login__input">
+                <input mdInput
+                       placeholder="Password"
+                       name="password"
+                       [(ngModel)]="model.password"
+                       type="password"
+                       required="required" />
+            </md-input-container>
+        </md-card-content>
+
+        <md-card-actions>
+            <button md-raised-button color="primary" type="submit">Sign in</button>
+            <button md-button type="button" routerLink="/" routerLinkActive="active">Cancel</button>
+        </md-card-actions>
+    </form>
+</md-card>

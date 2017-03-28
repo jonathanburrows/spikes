@@ -1,0 +1,21 @@
+﻿:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.local-login {
+    max-width: 240px;
+}
+
+@media only screen and (max-width : 480px) {
+    .local-login__input {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 481px) {
+    .local-login__input {
+        width: 240px;
+    }
+}

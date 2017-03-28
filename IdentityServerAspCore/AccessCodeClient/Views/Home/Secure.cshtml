@@ -1,0 +1,24 @@
+﻿<section class="planets">
+    <header class="planets__header">Planets</header>
+</section>
+
+<script id="planet-template" type="text/x-template">
+    <div class="planets__item">
+        <span class="planets__item--name"></span>
+    </div>
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.0.js"
+        integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ="
+        crossorigin="anonymous"></script>
+<script>
+    $.ajax('/api/planet').done(function (planets) {
+        const planetTemplate = $('#planet-template').html();
+        const $planetContainer = $('.planets');
+
+        planets.forEach(function (planet) {
+            const $planet = $(planetTemplate).appendTo($planetContainer);
+            $('.planets__item--name', $planet).html(planet.name);
+        });
+    });
+</script>

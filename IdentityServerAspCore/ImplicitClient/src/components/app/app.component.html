@@ -1,0 +1,11 @@
+﻿<md-toolbar color="primary">
+    <a md-button routerLink="/">Implicit Client</a>
+
+    <button md-button *ngIf="securityService.isAuthorized" routerLink="/account/secret" routerLinkActive="active">Secret</button>
+    <button md-button *ngIf="!securityService.isAuthorized" (click)="login()">Login</button>
+    <button md-button *ngIf="securityService.isAuthorized" (click)="logoff()">Logout</button>
+</md-toolbar>
+
+<section class="container">
+    <router-outlet></router-outlet>
+</section>

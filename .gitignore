@@ -7,4 +7,3 @@ dist/
 *.log*
 *.xproj.user
 project.lock.json
-~$*
