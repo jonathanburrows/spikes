@@ -39,10 +39,10 @@ namespace AuthorizationServer.Stores
                     RequireConsent = false,
                     AllowOfflineAccess = true,
 
-                    RedirectUris = { "http://localhost:5002/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
-                    AllowedCorsOrigins = { "http://localhost:5002" },
-                    LogoutUri = "http://localhost:5002/logout-local",
+                    RedirectUris = { "https://localhost:44302/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:44302/signout-callback-oidc" },
+                    AllowedCorsOrigins = { "https://localhost:44302" },
+                    LogoutUri = "https://localhost:44302/logout-local",
                     UpdateAccessTokenClaimsOnRefresh = true,
 
                     AllowedScopes =

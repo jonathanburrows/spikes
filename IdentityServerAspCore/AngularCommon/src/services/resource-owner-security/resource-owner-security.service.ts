@@ -29,11 +29,11 @@ export class ResourceOwnerSecurityService extends SecurityService {
     }
 
     public logout() {
-        throw new Error('Not yet implemented.');
+        this.tokenService.token = null;
+        this.router.navigate(['/']);
     }
 
     public logoutLocal() {
-        debugger;
         this.tokenService.token = null;
     }
 

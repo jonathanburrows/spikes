@@ -34,10 +34,10 @@ export class TokenService {
     }
 
     public tokenExpired = new EventEmitter<DataIdToken>();
-    private tokenExpiryCountdown: number;
+    private tokenExpiryCountdown: any;
 
     public tokenHalflife = new EventEmitter<DataIdToken>();
-    private tokenHalflifeCountdown: number;
+    private tokenHalflifeCountdown: any;
 
     constructor(private storageService: StorageService) { }
 

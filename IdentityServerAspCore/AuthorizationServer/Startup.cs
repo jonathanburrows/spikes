@@ -2,6 +2,7 @@
 using AuthorizationServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,10 +20,6 @@ namespace AuthorizationServer
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
-            if (env.IsDevelopment())
-            {
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
             Configuration = builder.Build();
         }
 
@@ -30,16 +27,14 @@ namespace AuthorizationServer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var windowsProviders = new[] 
+            var windowsProviders = new[]
             {
                 new ExternalProvider { AuthenticationScheme = "NTLM", DisplayName = "Windows" }
             };
 
-            services
-                .AddApplicationInsightsTelemetry(Configuration)
-                .AddAuthorization(options => options.WindowsProviders = windowsProviders);
+            services.AddAuthorization(options => options.WindowsProviders = windowsProviders);
 
-            services.AddMvc();
+            services.AddMvc(options => options.Filters.Add(new RequireHttpsAttribute()));
 
             var testStore = new Stores.TestStore();
             services
@@ -58,22 +53,7 @@ namespace AuthorizationServer
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
-
-            app.UseApplicationInsightsRequestTelemetry()
-                .UseDeveloperExceptionPage()
-                .UseBrowserLink()
-                .UseApplicationInsightsExceptionTelemetry()
+            app.UseDeveloperExceptionPage()
                 //.UseIdentity()
                 .UseIdentityServer()
                 .UseStaticFiles()

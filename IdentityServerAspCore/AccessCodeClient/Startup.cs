@@ -3,6 +3,7 @@ using AccessCodeClient.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -21,10 +22,6 @@ namespace AccessCodeClient
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
-            if (env.IsDevelopment())
-            {
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
             Configuration = builder.Build();
         }
 
@@ -33,11 +30,13 @@ namespace AccessCodeClient
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddApplicationInsightsTelemetry(Configuration)
                 .AddScoped<IHttpContextAccessor, HttpContextAccessor>()
                 .AddScoped<OidcHttpClientFactory>()
                 .Configure<ClientOptions>(options => options.ResourceServerUrl = "http://localhost:5001")
-                .AddMvc();
+                .AddMvc(options =>
+                {
+                    options.Filters.Add(new RequireHttpsAttribute());
+                });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -47,31 +46,28 @@ namespace AccessCodeClient
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-             app.UseApplicationInsightsRequestTelemetry() 
-                .UseDeveloperExceptionPage()
-                .UseBrowserLink()
-                .UseApplicationInsightsExceptionTelemetry()
-                .UseCookieAuthentication(new CookieAuthenticationOptions { AuthenticationScheme = "Cookies" })
-                .UseOpenIdConnectAuthentication(new OpenIdConnectOptions
-                {
-                    AuthenticationScheme = "oidc",
-                    SignInScheme = "Cookies",
+            app.UseDeveloperExceptionPage()
+               .UseCookieAuthentication(new CookieAuthenticationOptions { AuthenticationScheme = "Cookies" })
+               .UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+               {
+                   AuthenticationScheme = "oidc",
+                   SignInScheme = "Cookies",
 
-                    Authority = "http://localhost:5000",
-                    RequireHttpsMetadata = false,
+                   Authority = "https://localhost:44300",
+                   RequireHttpsMetadata = false,
 
-                    ClientId = "access-code",
-                    ClientSecret = "secret",
+                   ClientId = "access-code",
+                   ClientSecret = "secret",
 
-                    ResponseType = "code id_token",
-                    Scope = { "resource-server", "offline_access", "openid", "profile" },
-                    PostLogoutRedirectUri = "http://localhost:5002",
+                   ResponseType = "code id_token",
+                   Scope = { "resource-server", "offline_access", "openid", "profile" },
+                   PostLogoutRedirectUri = "https://localhost:44302",
 
-                    GetClaimsFromUserInfoEndpoint = true,
-                    SaveTokens = true
-                })
-                .UseStaticFiles()
-                .UseMvcWithDefaultRoute();
+                   GetClaimsFromUserInfoEndpoint = true,
+                   SaveTokens = true
+               })
+               .UseStaticFiles()
+               .UseMvcWithDefaultRoute();
         }
     }
 }

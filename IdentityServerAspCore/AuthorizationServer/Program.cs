@@ -12,7 +12,7 @@ namespace AuthorizationServer
 
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls("http://0.0.0.0:5000")
+                .UseUrls("https://0.0.0.0:44300")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

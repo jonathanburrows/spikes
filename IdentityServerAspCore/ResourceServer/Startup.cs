@@ -15,11 +15,6 @@ namespace ResourceServer
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            if (env.IsEnvironment("Development"))
-            {
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
-
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -30,7 +25,6 @@ namespace ResourceServer
         {
             services
                 .AddAspCommon()
-                .AddApplicationInsightsTelemetry(Configuration)
                 .AddCors()
                 .AddMvcCore()
                 .AddAuthorization()
@@ -42,11 +36,9 @@ namespace ResourceServer
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry()
-                .UseApplicationInsightsExceptionTelemetry()
-                .UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
                 {
-                    Authority = "http://localhost:5000",
+                    Authority = "https://localhost:44300",
                     RequireHttpsMetadata = false,
                     ApiName = "resource-server",
                     ApiSecret = "secret"

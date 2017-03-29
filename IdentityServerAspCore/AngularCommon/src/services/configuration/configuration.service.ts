@@ -3,7 +3,7 @@
 @Injectable()
 export class ConfigurationService {
     url = 'http://localhost:5003';
-    authorizationServerUrl = 'http://localhost:5000';
+    authorizationServerUrl = 'https://localhost:44300';
     resourceServerUrl = 'http://localhost:5001';
     clientName = 'resource-owner-client';
     clientSecret = 'secret';
