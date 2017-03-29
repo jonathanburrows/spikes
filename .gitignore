@@ -9,4 +9,4 @@ dist/
 project.lock.json
 
 # this will hold client secrets
-appsettings.development.json
+IdentityServerAspCore/AuthorizationServer/appsettings.development.json
