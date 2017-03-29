@@ -7,3 +7,6 @@ dist/
 *.log*
 *.xproj.user
 project.lock.json
+
+# this will hold client secrets
+IdentityServerAspCore/AuthorizationServer/appsettings.development.json
