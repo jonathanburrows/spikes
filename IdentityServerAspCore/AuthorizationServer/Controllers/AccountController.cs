@@ -9,12 +9,15 @@ using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Test;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace AuthorizationServer.Controllers
@@ -287,6 +290,94 @@ namespace AuthorizationServer.Controllers
             {
                 return null;
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExternalLogin(string provider, string returnUrl)
+        {
+            var callbackUrl = Url.Action(nameof(ExternalLoginCallback), new { returnUrl = returnUrl });
+
+            var windowsProvider = AuthorizationOptions.WindowsProviders.FirstOrDefault(wp => wp.AuthenticationScheme.Equals(provider, StringComparison.OrdinalIgnoreCase));
+            if (windowsProvider == null)
+            {
+                var thirdPartyAuthenticationProperties = new AuthenticationProperties
+                {
+                    RedirectUri = callbackUrl,
+                    Items = { { "scheme", provider } }
+                };
+                return new ChallengeResult(provider, thirdPartyAuthenticationProperties);
+            }
+            else if (User is WindowsPrincipal)
+            {
+                var windowsAuthenticationProperties = new AuthenticationProperties
+                {
+                    Items =
+                    {
+                        ["scheme"] = windowsProvider.AuthenticationScheme
+                    }
+                };
+
+                var claimsIdentity = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, User.Identity.Name),
+                    new Claim(ClaimTypes.Name, User.Identity.Name)
+                });
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                await HttpContext.Authentication.SignInAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme, claimsPrincipal, windowsAuthenticationProperties);
+                return Redirect(callbackUrl);
+            }
+            else
+            {
+                var windowsProviders = AuthorizationOptions.WindowsProviders.Select(wp => wp.AuthenticationScheme).ToList();
+                return new ChallengeResult(windowsProviders);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl)
+        {
+            if (returnUrl == null)
+            {
+                throw new ArgumentNullException(nameof(returnUrl));
+            }
+            if (!InteractionService.IsValidReturnUrl(returnUrl))
+            {
+                throw new ArgumentException($"return url {returnUrl} is invalid.");
+            }
+
+            var info = await HttpContext.Authentication.GetAuthenticateInfoAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
+            var tempUser = info?.Principal;
+            if (tempUser == null)
+            {
+                throw new InvalidOperationException("External authentication error.");
+            }
+
+            var claims = tempUser.Claims.ToList();
+
+            var subject = claims.FirstOrDefault(c => c.Type == JwtClaimTypes.Subject);
+            var nameIdentifier = claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            var userIdClaim = subject ?? nameIdentifier;
+            if (userIdClaim == null)
+            {
+                throw new InvalidOperationException("unknown userid");
+            }
+
+            claims.Remove(userIdClaim);
+            var provider = info.Properties.Items["scheme"];
+            var userId = userIdClaim.Value;
+
+            var user = TestUserStore.FindByExternalProvider(provider, userId) ?? TestUserStore.AutoProvisionUser(provider, userId, claims);
+
+            var sessionClaims = claims.Where(c => c.Type == JwtClaimTypes.SessionId).ToArray();
+
+            var idToken = info.Properties.GetTokenValue("id_token");
+            var props = idToken != null ? new AuthenticationProperties(new Dictionary<string, string> { ["id_token"] = idToken }) : null;
+
+            await HttpContext.Authentication.SignInAsync(user.SubjectId, user.Username, provider, props, sessionClaims);
+            await HttpContext.Authentication.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
+
+            return Redirect(returnUrl);
         }
     }
 }

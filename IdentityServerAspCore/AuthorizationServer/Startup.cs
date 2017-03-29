@@ -1,13 +1,16 @@
 ﻿using AuthorizationServer.Middleware;
 using AuthorizationServer.Models;
+using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+using System;
+    
 namespace AuthorizationServer
 {
     public class Startup
@@ -21,6 +24,22 @@ namespace AuthorizationServer
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+
+            var requiredSecrets = new[] {
+                "Authorization:Facebook:ClientId",
+                "Authorization:Facebook:ClientSecret",
+                "Authorization:Google:ClientId",
+                "Authorization:Google:ClientSecret",
+                "Authorization:Microsoft:ClientId",
+                "Authorization:Microsoft:ClientSecret"
+            };
+            foreach (var requiredSecret in requiredSecrets)
+            {
+                if (Configuration[requiredSecret] == null)
+                {
+                    throw new ArgumentException($"The secret {requiredSecret} has not been set");
+                }
+            }
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -54,11 +73,36 @@ namespace AuthorizationServer
             loggerFactory.AddDebug();
 
             app.UseDeveloperExceptionPage()
-                //.UseIdentity()
                 .UseIdentityServer()
+                .UseFacebookAuthentication(new FacebookOptions
+                {
+                    AuthenticationScheme = "Facebook",
+                    DisplayName = "Facebook",
+                    SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+
+                    AppId = Configuration["Authorization:Facebook:ClientId"],
+                    AppSecret = Configuration["Authorization:Facebook:ClientSecret"]
+                })
+                .UseGoogleAuthentication(new GoogleOptions
+                {
+                    AuthenticationScheme = "Google",
+                    DisplayName = "Google",
+                    SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                    ClientId = Configuration["Authorization:Google:ClientId"],
+                    ClientSecret = Configuration["Authorization:Google:ClientSecret"]
+                })
+                .UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions
+                {
+                    AuthenticationScheme = "Microsoft",
+                    DisplayName = "Microsoft",
+                    SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                    ClientId = Configuration["Authorization:Microsoft:ClientId"],
+                    ClientSecret = Configuration["Authorization:Microsoft:ClientSecret"]
+                })
                 .UseStaticFiles()
                 .UseMvc(routes => routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"))
                 .UseMiddleware<SecurityHeaderMiddleware>();
         }
     }
 }
+
