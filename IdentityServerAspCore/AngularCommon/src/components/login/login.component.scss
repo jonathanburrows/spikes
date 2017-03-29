@@ -8,14 +8,66 @@
     max-width: 240px;
 }
 
+.local-login__header {
+    margin-bottom: 0;
+}
+
+.local-login__header--title {
+    margin-left: -8px;
+}
+
+.local-login__external-providers--container {
+    padding: 16px 0;
+    position: relative;
+}
+
+.local-login__external-providers--or-strikethrough {
+    border-color: rgba(0, 0, 0, 0.38);
+    left: 0;
+    position: absolute;
+    top: 24px;
+    width: 100%;
+}
+
+.local-login__external-providers--or-title {
+    background-color: white;
+    color: rgba(0, 0, 0, 0.38);
+    font-style: italic;
+    left: calc(50% - 4px);
+    padding: 8px;
+    position: relative;
+    z-index: 3;
+}
+
 @media only screen and (max-width : 480px) {
-    .local-login__input {
+    .local-login__input-container {
+        width: 100%;
+    }
+
+    .local-login__actions--external-provider {
         width: 100%;
     }
 }
 
 @media only screen and (min-width: 481px) {
-    .local-login__input {
+    .local-login__input-container {
         width: 240px;
     }
+
+    .local-login__actions--external-provider {
+        width: 112px;
+
+        &:nth-of-type(-n+2) {
+            margin-bottom: 16px;
+        }
+
+        &:nth-child(2n) {
+            margin-right: 16px;
+        }
+    }
+}
+
+.local-login__input {
+    background-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
 }

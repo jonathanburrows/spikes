@@ -1,31 +1,47 @@
 ﻿<md-card class="local-login">
     <form name="local-login__form" (ngSubmit)="login()">
-        <md-card-header>
-            <md-card-title>Sign into lavalav</md-card-title>
+        <md-card-header class="local-login__header">
+            <md-card-title class="local-login__header--title">Sign into lavalav</md-card-title>
         </md-card-header>
 
         <md-card-content>
-            <md-input-container class="local-login__input">
+            <md-input-container class="local-login__input-container">
                 <input mdInput
+                       class="local-login__input"
                        placeholder="Username"
                        name="username"
                        [(ngModel)]="model.username"
                        required="required" />
             </md-input-container>
 
-            <md-input-container class="local-login__input">
+            <md-input-container class="local-login__input-container">
                 <input mdInput
+                       class="local-login__input"
                        placeholder="Password"
                        name="password"
                        [(ngModel)]="model.password"
                        type="password"
                        required="required" />
             </md-input-container>
+
+            <button md-raised-button color="accent" type="submit">Sign in</button>
+            <button md-button color="primary" type="button" routerLink="/" routerLinkActive="active">Cancel</button>
         </md-card-content>
 
-        <md-card-actions>
-            <button md-raised-button color="primary" type="submit">Sign in</button>
-            <button md-button type="button" routerLink="/" routerLinkActive="active">Cancel</button>
-        </md-card-actions>
+
+        <section class="local-login__external-providers" *ngIf="externalProviders.length">
+            <md-card-content class="local-login__external-providers--container">
+                <hr class="local-login__external-providers--or-strikethrough" />
+                <span class="local-login__external-providers--or-title">Or</span>
+            </md-card-content>
+
+            <button *ngFor="let externalProvider of externalProviders"
+                    md-button
+                    color="primary"
+                    class="local-login__actions--external-provider"
+                    (click)="externalProviderService.login(externalProvider.authenticationScheme)">
+                {{externalProvider.displayName}}
+            </button>
+        </section>
     </form>
 </md-card>

@@ -4,9 +4,7 @@ using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -37,7 +35,7 @@ namespace AuthorizationServer
             {
                 if (Configuration[requiredSecret] == null)
                 {
-                    throw new ArgumentException($"The secret {requiredSecret} has not been set");
+                    throw new ArgumentException($"The variable {requiredSecret} has not been set");
                 }
             }
         }
@@ -50,7 +48,6 @@ namespace AuthorizationServer
             {
                 new ExternalProvider { AuthenticationScheme = "NTLM", DisplayName = "Windows" }
             };
-
             services.AddAuthorization(options => options.WindowsProviders = windowsProviders);
 
             services.AddMvc(options => options.Filters.Add(new RequireHttpsAttribute()));
@@ -58,6 +55,7 @@ namespace AuthorizationServer
             var testStore = new Stores.TestStore();
             services
                 .AddSingleton(testStore)
+                .AddCors()
                 .AddIdentityServer()
                 .AddTemporarySigningCredential()
                 .AddInMemoryPersistedGrants()
@@ -73,6 +71,7 @@ namespace AuthorizationServer
             loggerFactory.AddDebug();
 
             app.UseDeveloperExceptionPage()
+                .UseCors(options => options.AllowAnyOrigin())
                 .UseIdentityServer()
                 .UseFacebookAuthentication(new FacebookOptions
                 {

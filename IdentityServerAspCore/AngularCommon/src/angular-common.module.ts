@@ -20,6 +20,7 @@ import {
     ApiService,
     ConfigurationService,
     LocalStorageService,
+    ExternalProviderService,
     ImplicitSecurityService,
     StorageService,
     TokenService
@@ -51,6 +52,9 @@ import {
         MaterialModule.forRoot(),
         RouterModule,
         AngularCommonRouterModule
+    ],
+    providers: [
+        ExternalProviderService
     ]
 })
 export class AngularCommonModule { }

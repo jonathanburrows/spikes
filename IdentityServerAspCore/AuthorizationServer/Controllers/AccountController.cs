@@ -341,10 +341,6 @@ namespace AuthorizationServer.Controllers
             {
                 throw new ArgumentNullException(nameof(returnUrl));
             }
-            if (!InteractionService.IsValidReturnUrl(returnUrl))
-            {
-                throw new ArgumentException($"return url {returnUrl} is invalid.");
-            }
 
             var info = await HttpContext.Authentication.GetAuthenticateInfoAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
             var tempUser = info?.Principal;
@@ -378,6 +374,19 @@ namespace AuthorizationServer.Controllers
             await HttpContext.Authentication.SignOutAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme);
 
             return Redirect(returnUrl);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetExternalProviders(string returnUrl)
+        {
+            if (returnUrl == null)
+            {
+                throw new ArgumentNullException(nameof(returnUrl));
+            }
+
+            var authorizationContext = await InteractionService.GetAuthorizationContextAsync(returnUrl);
+            var providers = await GetProvidersAsync(authorizationContext);
+            return new JsonResult(providers.ToList());
         }
     }
 }
