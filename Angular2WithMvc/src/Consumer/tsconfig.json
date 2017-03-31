@@ -1,0 +1,32 @@
+﻿{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [ "es6", "dom" ],
+    "mapRoot": "",
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "wwwroot/dist2",
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@angular/*": [ "./node_modules/@angular/*" ],
+      "@angular/platform-browser-dynamic/testing": [ "./node_modules/@angular/platform-browser-dynamic/testing" ],
+      "angular-components": [ "./node_modules/angular-components" ],
+      "rxjs/*": [ "./node_modules/rxjs/*" ]
+    }
+  },
+  "exclude": [
+    "node_modules/@angular"
+  ],
+  "files": [
+    "wwwroot/src/login/login.main.ts",
+    "wwwroot/src/logout/logout.main.ts"
+  ],
+  "compileOnSave": false
+}

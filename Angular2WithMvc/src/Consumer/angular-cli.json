@@ -1,0 +1,85 @@
+{
+  "project": {
+    "version": "1.0.0-beta.28.3",
+    "name": "consumer"
+  },
+  "apps": [
+    {
+      "name": "login",
+      "root": "wwwroot/src/login",
+      "outDir": "wwwroot/dist/login",
+      "assets": [
+      ],
+      "index": "login.html",
+      "main": "login.main.ts",
+      "polyfills": "../polyfills.ts",
+      "test": "../../../test.config.ts",
+      "tsconfig": "../../../tsconfig.json",
+      "prefix": "lvl",
+      "styles": [
+      ],
+      "scripts": [],
+      "environmentSource": "../environments/environment.ts",
+      "environments": {
+        "dev": "../environments/environment.ts",
+        "prod": "../environments/environment.prod.ts"
+      }
+    },{
+      "name": "logout",
+      "root": "wwwroot/src/logout",
+      "outDir": "wwwroot/dist/logout",
+      "assets": [
+      ],
+      "index": "logout.html",
+      "main": "logout.main.ts",
+      "polyfills": "../polyfills.ts",
+      "test": "../../../test.config.ts",
+      "tsconfig": "../../../tsconfig.json",
+      "prefix": "lvl",
+      "styles": [
+      ],
+      "scripts": [],
+      "environmentSource": "../environments/environment.ts",
+      "environments": {
+        "dev": "../environments/environment.ts",
+        "prod": "../environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "files": "wwwroot/src/**/*.ts",
+      "project": "tsconfig.json"
+    },
+    {
+      "files": "wwwroot/e2e/**/*.ts",
+      "project": "e2e/tsconfig.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "prefixInterfaces": false,
+    "inline": {
+      "style": false,
+      "template": false
+    },
+    "spec": {
+      "class": false,
+      "component": true,
+      "directive": true,
+      "module": false,
+      "pipe": true,
+      "service": true
+    }
+  }
+}
