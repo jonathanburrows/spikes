@@ -1,0 +1,327 @@
+<!doctype html>
+
+<!-- 
+    This static file gives the measurements on how the layout will be set, it is not interactive. 
+    On this page, the navigation drawer is stuck out.
+-->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <section class="navigation-drawer">
+        <header class="navigation-drawer__header">
+            <span class="avatar-column">
+                <img class="icon" src="./logo.png" />
+            </span>
+            <span class="navigation-drawer--title">lavalav</span>
+        </header>
+
+        <div class="seperator"></div>
+        
+        <section class="navigation-drawer__container">
+            <section class="navigation-drawer__content">
+                <section class="navigation-drawer__item">
+                    <span class="avatar-column">
+                        <img class="icon" src="./inbox.png" />
+                    </span>
+                    <span class="navigation-drawer__title">Inbox</span>
+                </section>
+                <section class="navigation-drawer__item">
+                    <span class="avatar-column">
+                        <img class="icon" src="./sent.png" />
+                    </span>
+                    <span class="navigation-drawer__title">Sent</span>
+                </section>
+                <section class="navigation-drawer__item">
+                    <span class="avatar-column">
+                        <img class="icon" src="./favourites.png" />
+                    </span>
+                    <span class="navigation-drawer__title">Favourites</span>
+                </section>
+                <section class="navigation-drawer__item">
+                    <span class="avatar-column">
+                        <img class="icon" src="./drafts.png" />
+                    </span>
+                    <span class="navigation-drawer__title">Drafts</span>
+                </section>
+            </section>
+
+            <section class="navigation-drawer__content">
+                <section class="navigation-drawer__item">
+                    <span class="navigation-drawer__title">All mail</span>
+                </section>
+                <section class="navigation-drawer__item">
+                    <span class="navigation-drawer__title">Trash</span>
+                </section>
+                <section class="navigation-drawer__item">
+                    <span class="navigation-drawer__title">Spam</span>
+                </section>
+                <section class="navigation-drawer__item">
+                    <span class="navigation-drawer__title">Follow up</span>
+                </section>
+            </section>
+        </section>
+    </section>
+
+    <section class="toolbar">
+        <span class="avatar-column">
+            <img class="icon" src="./menu.png" />
+        </span>
+        <span class="toolbar__title">Inbox</span>
+        <span class="toolbar__search">
+            <img class="icon" src="./search.png" />
+        </span>
+    </section>
+    
+    <section class="content">
+        <header class="content__title">
+            Contacts
+        </header>
+        <section class="content__area">
+            <header class="content__subtitle">Family</header>
+
+            <section class="content__item">
+                <span class="avatar-column">
+                    <img class="icon avatar-colomn--icon" src="./avatar.png" />
+                </span>
+                <span class="content__item--details">Jane Smith</span>
+            </section>
+            <section class="content__item">
+                <span class="avatar-column">
+                    <img class="icon avatar-colomn--icon" src="./avatar.png" />
+                </span>
+                <span class="content__item--details">John Smith</span>
+            </section>
+            <section class="content__item">
+                <span class="avatar-column">
+                    <img class="icon avatar-colomn--icon" src="./avatar.png" />
+                </span>
+                <span class="content__item--details">Billy Smith</span>
+            </section>
+        </section>
+        <section class="content__area">
+            <header class="content__subtitle">Friends</header>
+
+            <section class="content__item">
+                <span class="avatar-column">
+                    <img class="icon avatar-colomn--icon" src="./avatar.png" />
+                </span>
+                <span class="content__item--details">Mittens</span>
+            </section>
+            <section class="content__item">
+                <span class="avatar-column">
+                    <img class="icon avatar-colomn--icon" src="./avatar.png" />
+                </span>
+                <span class="content__item--details">Captain Flumps</span>
+            </section>
+            <section class="content__item">
+                <span class="avatar-column">
+                    <img class="icon avatar-colomn--icon" src="./avatar.png" />
+                </span>
+                <span class="content__item--details">Nicky</span>
+            </section>
+            <section class="content__item">
+                <span class="avatar-column">
+                    <img class="icon avatar-colomn--icon" src="./avatar.png" />
+                </span>
+                <span class="content__item--details">Nom Nom</span>
+            </section>
+            <section class="content__item">
+                <span class="avatar-column">
+                    <img class="icon avatar-colomn--icon" src="./avatar.png" />
+                </span>
+                <span class="content__item--details">Grumpalumps</span>
+            </section>
+        </section>
+    </section>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toolbar{
+            background-color: #E1F5FE;
+            box-sizing: border-box;
+            font-size: 18px;
+            display: flex;
+            justify-content: flex-start;
+            min-height: 56px; /* Uses title height */
+            line-height: 56px; /* Uses title height */
+            padding-left: 16px; /*Uses screen padding*/
+            padding-right: 16px; /*Uses screen padding*/
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 6;
+        }
+
+        .avatar-column {
+            display: inline-block;
+            margin-right: 16px; /* Uses avatar column margin */
+            width: 32px; /* Uses avatar column width*/
+        }
+
+        .icon{
+            width: 24px; /* Should have its own variable? */
+            vertical-align: middle;
+        }
+
+        .toolbar__search{
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        .content{
+            margin-top: 56px; /* Uses title height */
+            padding-left: 16px; /* Uses screen padding */
+            padding-right: 16px; /* Uses screen padding */
+        }
+
+        .content__title{
+            font-size: 24px; /* title font size */
+            line-height: 72px; /* content title height */
+            min-height: 72px; /* content title height */
+            padding-left: 48px; /* avatar column width + avatar column margin */
+        }
+
+        .content__area{
+            margin-bottom: 8px; /* Uses space between content */
+        }
+
+        .content__subtitle{
+            padding-left: 48px; /* avatar column width + avatar column margin */
+            min-height: 48px; /* Uses subtitle height */
+            line-height: 48px; /* Uses subtitle height */
+            font-size: 16px;
+        }
+
+        .content__item{
+            display: flex;
+            line-height: 72px; /* Uses list item height */
+            min-height: 72px; /* Uses list item height */
+        }
+
+        .avatar-colomn--icon{
+            width: 32px;
+        }
+
+        .navigation-drawer{
+            background-color: white;
+            border-right: 1px solid #DDD;
+            height: 100%;
+            overflow-y:auto;            
+            position: fixed;
+            top: 0;
+            z-index: 8;
+            width: calc(100% - 56px); /* Uses navigation drawer margin */
+        }
+
+        .navigation-drawer__header{
+            line-height: 56px; /* Uses title height */            
+            min-height: 56px; /* Uses title height */
+            padding-left: 16px; /* Uses screen padding */
+            padding-right: 16px; /* Uses screen padding */
+        }
+
+        .seperator{
+            height: 0;
+            width: 100%;
+            border-bottom: 1px solid #DDD;
+        }
+
+        .navigation-drawer__container {
+            padding-left: 16px; /* Uses screen padding */
+            padding-right: 16px; /* Uses screen padding */
+        }
+
+        .navigation-drawer__content{
+            margin-top: 8px; /* uses space between content */
+        }
+
+        .navigation-drawer__item{
+            min-height: 48px; /* uses navigation item height */
+            line-height: 48px; /* uses navigation item height */
+        }
+
+        @media screen and (min-width: 480px) and (max-width: 599px){
+            .toolbar{
+                min-height: 48px; /* Uses title height */   
+                line-height: 48px; /* Uses title height */         
+                padding-left: 24px; /* Uses screen padding */
+                padding-right: 24px; /* Uses screen padding */
+            }
+
+            .navigation-drawer__header{
+                line-height: 48px; /* Uses title height */            
+                min-height: 48px; /* Uses title height */
+                padding-left: 24px; /* Uses screen padding */
+                padding-right: 24px; /* Uses screen padding */
+            }
+
+            .navigation-drawer__container {
+                padding-left: 24px; /* Uses screen padding */
+                padding-right: 24px; /* Uses screen padding */
+            }
+        }
+
+        /* Should put these breakpoints into their own variables. */
+        @media screen and (min-width: 600px) {
+            .navigation-drawer{
+                width: 240px; /* Uses navigation drawer width*/
+            }
+
+            .toolbar{
+                height: 64px; /* Uses title height */
+                line-height: 64px; /* Uses title height */
+                padding-left: 24px; /* Uses screen padding */
+                padding-right: 24px; /* Uses screen padding */
+                margin-left: 240px; /* Uses navigation drawer width */
+            }
+
+            .avatar-column{
+                margin-right: 24px; /* Uses avatar column padding */
+            }
+
+            .content{
+                padding-left: 24px; /* Uses screen padding */
+                padding-right: 24px; /* Uses screen padding */
+                margin-left: 240px; /* Uses navigation drawer width */
+            }
+
+            .content__title {
+                min-height: 80px; /* Uses title height */
+                line-height: 80px; /* Uses title height */
+                padding-left: 56px; /* avatar column width + avatar column margin */
+            }
+
+            .content__area{
+                margin-bottom: 8px; /* Uses space between content */
+            }
+
+            .content__subtitle{
+                padding-left: 56px; /* avatar column width + avatar column margin */
+            }
+
+            .navigation-drawer__header{
+                line-height: 64px; /* Uses title height */            
+                min-height: 64px; /* Uses title height */
+                padding-left: 24px; /* Uses screen padding */
+                padding-right: 24px; /* Uses screen padding */
+            }
+
+            .navigation-drawer__container {
+                padding-left: 24px; /* Uses screen padding */
+                padding-right: 24px; /* Uses screen padding */
+            }
+        }
+
+        @media screen and (min-width: 1280px){
+            /* Only perma show navigation here. */
+        }
+    </style>
+</body>
+</html>

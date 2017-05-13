@@ -1,0 +1,290 @@
+﻿@import '_app.variables.scss';
+
+.toolbar {
+  background-color: #E1F5FE;
+  box-sizing: border-box;
+  font-size: 18px;
+  display: flex;
+  justify-content: flex-start;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 6;
+
+  @media #{$portrait-screen} {
+    line-height: map-get($portrait, toolbar-height);
+    min-height: map-get($portrait, toolbar-height);
+    padding-left: map-get($portrait, screen-padding);
+    padding-right: map-get($portrait, screen-padding);
+  }
+
+  @media #{$landscape-screen} {
+    line-height: map-get($landscape, toolbar-height);
+    min-height: map-get($landscape, toolbar-height);
+    padding-left: map-get($landscape, screen-padding);
+    padding-right: map-get($landscape, screen-padding);
+  }
+
+  @media #{$tablet-screen} {
+    line-height: map-get($tablet, toolbar-height);
+    margin-left: map-get($portrait, navigation-drawer-width);
+    min-height: map-get($tablet, toolbar-height);
+    padding-left: map-get($tablet, screen-padding);
+    padding-right: map-get($tablet, screen-padding);
+  }
+}
+
+.avatar-column {
+  display: inline-block;
+
+  @media #{$portrait-screen} {
+    margin-right: map-get($portrait, screen-padding);
+    width: map-get($portrait, avatar-column-width);
+  }
+
+  @media #{$landscape-screen} {
+    margin-right: map-get($landscape, screen-padding);
+    width: map-get($landscape, avatar-column-width);
+  }
+
+  @media #{$tablet-screen} {
+    margin-right: map-get($tablet, screen-padding);
+    width: map-get($tablet, avatar-column-width);
+  }
+}
+
+.icon {
+  cursor: pointer;
+  width: 24px;
+  vertical-align: middle;
+}
+
+.toolbar__search {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.content {
+  @media #{$portrait-screen} {
+    margin-top: map-get($portrait, toolbar-height);
+    padding-left: map-get($portrait, screen-padding);
+  }
+
+  @media #{$landscape-screen} {
+    margin-top: map-get($landscape, toolbar-height);
+    padding-left: map-get($landscape, screen-padding);
+  }
+
+  @media #{$tablet-screen} {
+    margin-left: map-get($tablet, navigation-drawer-width);
+    margin-top: map-get($tablet, toolbar-height);
+    padding-left: map-get($tablet, screen-padding);
+  }
+}
+
+.content__title {
+  font-size: 24px;
+
+  @media #{$portrait-screen} {
+    line-height: map-get($portrait, content-title-height);
+    min-height: map-get($portrait, content-title-height);
+    padding-left: map-get($portrait, avatar-column-width) + map-get($portrait, screen-padding);
+  }
+
+  @media #{$landscape-screen} {
+    line-height: map-get($landscape, content-title-height);
+    min-height: map-get($landscape, content-title-height);
+    padding-left: map-get($landscape, avatar-column-width) + map-get($landscape, screen-padding);
+  }
+
+  @media #{$tablet-screen} {
+    line-height: map-get($tablet, content-title-height);
+    min-height: map-get($tablet, content-title-height);
+    padding-left: map-get($tablet, avatar-column-width) + map-get($tablet, screen-padding);
+  }
+}
+
+.content__area {
+  @media #{$portrait-screen} {
+    margin-bottom: map-get($portrait, content-margin-bottom);
+  }
+
+  @media #{$landscape-screen} {
+    margin-bottom: map-get($landscape, content-margin-bottom);
+  }
+
+  @media #{$tablet-screen} {
+    margin-bottom: map-get($tablet, content-margin-bottom);
+  }
+}
+
+.content__subtitle {
+  font-size: 16px;
+
+  @media #{$portrait-screen} {
+    padding-left: map-get($portrait, avatar-column-width) + map-get($portrait, screen-padding);
+    line-height: map-get($portrait, subtitle-height);
+    min-height: map-get($portrait, subtitle-height);
+  }
+
+  @media #{$landscape-screen} {
+    padding-left: map-get($landscape, avatar-column-width) + map-get($landscape, screen-padding);
+    line-height: map-get($landscape, subtitle-height);
+    min-height: map-get($landscape, subtitle-height);
+  }
+
+  @media #{$tablet-screen} {
+    padding-left: map-get($tablet, avatar-column-width) + map-get($tablet, screen-padding);
+    line-height: map-get($tablet, subtitle-height);
+    min-height: map-get($tablet, subtitle-height);
+  }
+}
+
+.content__item {
+  display: flex;
+
+  @media #{$portrait-screen} {
+    line-height: map-get($portrait, list-item-height);
+    min-height: map-get($portrait, list-item-height);
+  }
+
+  @media #{$landscape-screen} {
+    line-height: map-get($landscape, list-item-height);
+    min-height: map-get($landscape, list-item-height);
+  }
+
+  @media #{$tablet-screen} {
+    line-height: map-get($tablet, list-item-height);
+    min-height: map-get($tablet, list-item-height);
+  }
+}
+
+.avatar-colomn--icon {
+  width: 100%;
+}
+
+.navigation-drawer {
+  background-color: white;
+  border-right: 1px solid #DDD;
+  height: 100%;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  z-index: 8;
+
+
+  @media #{$portrait-screen} {
+    width: calc(100% - #{map-get($portrait, navigation-drawer-margin)});
+
+    &:not(.show-hamburger) {
+      display: none;
+    }
+  }
+
+  @media #{$landscape-screen} {
+    width: calc(100% - #{map-get($landscape, navigation-drawer-margin)});
+
+    &:not(.show-hamburger) {
+      display: none;
+    }
+  }
+
+  @media #{$tablet-screen} {
+    width: map-get($tablet, navigation-drawer-width);
+  }
+}
+
+
+.navigation-drawer__header {
+  @media #{$portrait-screen} {
+    line-height: map-get($portrait, toolbar-height);
+    min-height: map-get($portrait, toolbar-height);
+    padding-left: map-get($portrait, screen-padding);
+    padding-right: map-get($portrait, screen-padding);
+  }
+
+  @media #{$landscape-screen} {
+    line-height: map-get($landscape, toolbar-height);
+    min-height: map-get($landscape, toolbar-height);
+    padding-left: map-get($landscape, screen-padding);
+    padding-right: map-get($landscape, screen-padding);
+  }
+
+  @media #{$tablet-screen} {
+    line-height: map-get($tablet, toolbar-height);
+    min-height: map-get($tablet, toolbar-height);
+    padding-left: map-get($tablet, screen-padding);
+    padding-right: map-get($tablet, screen-padding);
+  }
+}
+
+.seperator {
+  height: 0;
+  width: 100%;
+  border-bottom: 1px solid #DDD;
+}
+
+.navigation-drawer__container {
+  @media #{$portrait-screen} {
+    padding-left: map-get($portrait, screen-padding);
+    padding-right: map-get($portrait, screen-padding);
+  }
+
+  @media #{$landscape-screen} {
+    padding-left: map-get($landscape, screen-padding);
+    padding-right: map-get($landscape, screen-padding);
+  }
+
+  @media #{$tablet-screen} {
+    padding-left: map-get($tablet, screen-padding);
+    padding-right: map-get($tablet, screen-padding);
+  }
+}
+
+.navigation-drawer__content {
+  @media #{$portrait-screen} {
+    margin-top: map-get($portrait, content-margin-top);
+  }
+
+  @media #{$landscape-screen} {
+    margin-top: map-get($portrait, content-margin-top);
+  }
+
+  @media #{$tablet-screen} {
+    margin-top: map-get($portrait, content-margin-top);
+  }
+}
+
+.navigation-drawer__item {
+  @media #{$portrait-screen} {
+    line-height: map-get($tablet, navigation-item-height);
+    min-height: map-get($tablet, navigation-item-height);
+  }
+
+  @media #{$landscape-screen} {
+    line-height: map-get($tablet, navigation-item-height);
+    min-height: map-get($tablet, navigation-item-height);
+  }
+
+  @media #{$tablet-screen} {
+    line-height: map-get($tablet, navigation-item-height);
+    min-height: map-get($tablet, navigation-item-height);
+  }
+}
+
+.navigation-modal {
+  background-color: hsla(0, 0, 0, 0.26);
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 7;
+
+  &:not(.show-hamburger) {
+    display: none;
+  }
+
+  @media #{$tablet-screen} {
+    display: none;
+  }
+}

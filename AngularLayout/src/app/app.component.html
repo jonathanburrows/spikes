@@ -1,0 +1,129 @@
+﻿
+<section class="navigation-drawer" [class.show-hamburger]="showHamburger">
+  <header class="navigation-drawer__header">
+    <span class="avatar-column">
+      <img class="icon" src="./assets/logo.png" />
+    </span>
+    <span class="navigation-drawer--title">lavalav</span>
+  </header>
+
+  <div class="seperator"></div>
+
+  <section class="navigation-drawer__container">
+    <section class="navigation-drawer__content">
+      <section class="navigation-drawer__item">
+        <span class="avatar-column">
+          <img class="icon" src="./assets/inbox.png" />
+        </span>
+        <span class="navigation-drawer__title">Inbox</span>
+      </section>
+      <section class="navigation-drawer__item">
+        <span class="avatar-column">
+          <img class="icon" src="./assets/sent.png" />
+        </span>
+        <span class="navigation-drawer__title">Sent</span>
+      </section>
+      <section class="navigation-drawer__item">
+        <span class="avatar-column">
+          <img class="icon" src="./assets/favourites.png" />
+        </span>
+        <span class="navigation-drawer__title">Favourites</span>
+      </section>
+      <section class="navigation-drawer__item">
+        <span class="avatar-column">
+          <img class="icon" src="./assets/drafts.png" />
+        </span>
+        <span class="navigation-drawer__title">Drafts</span>
+      </section>
+    </section>
+
+    <section class="navigation-drawer__content">
+      <section class="navigation-drawer__item">
+        <span class="navigation-drawer__title">All mail</span>
+      </section>
+      <section class="navigation-drawer__item">
+        <span class="navigation-drawer__title">Trash</span>
+      </section>
+      <section class="navigation-drawer__item">
+        <span class="navigation-drawer__title">Spam</span>
+      </section>
+      <section class="navigation-drawer__item">
+        <span class="navigation-drawer__title">Follow up</span>
+      </section>
+    </section>
+  </section>
+</section>
+
+<section class="navigation-modal" [class.show-hamburger]="showHamburger" (click)="toggleHamburger()"></section>
+
+<section class="toolbar">
+  <span class="avatar-column">
+    <img class="icon" src="./assets/menu.png" (click)="toggleHamburger()" />
+  </span>
+  <span class="toolbar__title">Inbox</span>
+  <span class="toolbar__search">
+    <img class="icon" src="./assets/search.png" />
+  </span>
+</section>
+
+<section class="content">
+  <header class="content__title">
+    Contacts
+  </header>
+  <section class="content__area">
+    <header class="content__subtitle">Family</header>
+
+    <section class="content__item">
+      <span class="avatar-column">
+        <img class="icon avatar-colomn--icon" src="./assets/avatar.png" />
+      </span>
+      <span class="content__item--details">Jane Smith</span>
+    </section>
+    <section class="content__item">
+      <span class="avatar-column">
+        <img class="icon avatar-colomn--icon" src="./assets/avatar.png" />
+      </span>
+      <span class="content__item--details">John Smith</span>
+    </section>
+    <section class="content__item">
+      <span class="avatar-column">
+        <img class="icon avatar-colomn--icon" src="./assets/avatar.png" />
+      </span>
+      <span class="content__item--details">Billy Smith</span>
+    </section>
+  </section>
+  <section class="content__area">
+    <header class="content__subtitle">Friends</header>
+
+    <section class="content__item">
+      <span class="avatar-column">
+        <img class="icon avatar-colomn--icon" src="./assets/avatar.png" />
+      </span>
+      <span class="content__item--details">Mittens</span>
+    </section>
+    <section class="content__item">
+      <span class="avatar-column">
+        <img class="icon avatar-colomn--icon" src="./assets/avatar.png" />
+      </span>
+      <span class="content__item--details">Captain Flumps</span>
+    </section>
+    <section class="content__item">
+      <span class="avatar-column">
+        <img class="icon avatar-colomn--icon" src="./assets/avatar.png" />
+      </span>
+      <span class="content__item--details">Nicky</span>
+    </section>
+    <section class="content__item">
+      <span class="avatar-column">
+        <img class="icon avatar-colomn--icon" src="./assets/avatar.png" />
+      </span>
+      <span class="content__item--details">Nom Nom</span>
+    </section>
+    <section class="content__item">
+      <span class="avatar-column">
+        <img class="icon avatar-colomn--icon" src="./assets/avatar.png" />
+      </span>
+      <span class="content__item--details">Grumpalumps</span>
+    </section>
+  </section>
+</section>
