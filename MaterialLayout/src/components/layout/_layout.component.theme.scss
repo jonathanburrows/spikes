@@ -1,0 +1,14 @@
+﻿@import '~@angular/material/theming';
+
+@mixin layout-theme($theme) {
+  $foreground: map-get($theme, primary);
+  $selected-color: mat-color($foreground, 500);
+
+  .navigation-group--selected {
+    color: $selected-color;
+  }
+
+  .avatar-icon--selected {
+    color: $selected-color;
+  }
+}

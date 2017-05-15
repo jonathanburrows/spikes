@@ -1,0 +1,30 @@
+﻿<!--Shadow was halfed because the one from the material framework is way to strong. -->
+<nav class="navigation-drawer mat-elevation-z8" [class.show-side-nav]="showSideNav">
+  <header class="navigation-title">
+    <md-icon class="avatar-column">dashboard</md-icon>
+    <span class="navigation-title--name">lavalav</span>
+  </header>
+
+  <section class="navigation-group" *ngFor="let group of navigationItems">
+    <section class="navigation-group--title">{{group.name}}</section>
+    <section *ngFor="let navigationItem of group.children" class="navigation-group--item" [class.navigation-group--selected]="navigationItem.name === selectedNavigation">
+      <md-icon *ngIf="navigationItem.icon" class="avatar-column avatar-icon"  [class.avatar-icon--selected]="navigationItem.name === selectedNavigation">{{navigationItem.icon}}</md-icon>
+      <span>{{navigationItem.name}}</span>
+    </section>
+  </section>
+</nav>
+<div class="navigation-overlay" [class.show-side-nav]="showSideNav" (click)="closeSideNav()"></div>
+
+<md-toolbar color="primary" class="app-toolbar mat-elevation-z4">
+  <!-- The automatically generated row is hidden, so styles to the class can be applied. -->
+  <md-toolbar-row class="app-toolbar-row">
+    <md-icon class="avatar-column hamburger-button" (click)="openSideNav()">menu</md-icon>
+    <span>Inbox</span>
+    <span class="fill-remaining"></span>
+    <md-icon class="avatar-icon--search">search</md-icon>
+  </md-toolbar-row>
+</md-toolbar>
+
+<section class="screen">
+  <ng-content></ng-content>
+</section>

@@ -1,0 +1,77 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+@import '~@angular/material/theming';
+
+@import 'app.variables';
+@import '../components/layout/layout.component.theme';
+
+@mixin app-theme($theme) {
+  @include mat-core();
+  @include angular-material-theme($theme);
+  @include layout-theme($theme);
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url('../assets/MaterialIcons-Regular.woff2') format('woff2'), url('../assets/MaterialIcons-Regular.woff') format('woff');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.avatar-column {
+  vertical-align: middle;
+
+  @media #{$portrait-screen} {
+    margin-right: map-get($portrait, screen-padding);
+    width: map-get($portrait, avatar-column-width);
+  }
+
+  @media #{$landscape-screen} {
+    margin-right: map-get($landscape, screen-padding);
+    width: map-get($landscape, avatar-column-width);
+  }
+
+  @media #{$tablet-screen} {
+    margin-right: map-get($tablet, screen-padding);
+    width: map-get($tablet, avatar-column-width);
+  }
+}
+
+.screen .mat-list .mat-list-item .mat-list-item-content {
+  padding: 0;
+}
+
+.screen .mat-list .mat-subheader {
+  padding-left: 0;
+}
+
+.avatar-icon {
+  color: rgba(0, 0, 0, 0.54);
+}

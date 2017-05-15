@@ -1,0 +1,13 @@
+﻿<md-list>
+  <h3 md-subheader>Family</h3>
+  <md-list-item *ngFor="let familyMember of family">
+    <md-icon md-list-icon class="avatar-icon">person</md-icon>
+    <div md-line>{{familyMember.name}}</div>
+  </md-list-item>
+
+  <h3 md-subheader>Pets</h3>
+  <md-list-item *ngFor="let pet of pets">
+    <md-icon md-list-icon class="avatar-icon">bug_report</md-icon>
+    <div md-line>{{pet.name}}</div>
+  </md-list-item>
+</md-list>
